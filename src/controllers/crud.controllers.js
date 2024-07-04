@@ -1,3 +1,4 @@
+const { type } = require("os");
 const students = require("../students");
 
 function HOME(req, res) {
@@ -38,7 +39,7 @@ function postNewStudent(req, res) {
   if (typeof curse === Number) {
     return res.send("ESTE CAMPO DEBE DE SER TEXTO");
   }
-  const repeatName = db.find((students) => students.fullName === fullName);
+  const repeatName = students.find((students) => students.fullName === fullName);
   if (repeatName) {
     return res.send("YA EXISTE UN REGISTRO CON ESTE NOMBRE");
   }
