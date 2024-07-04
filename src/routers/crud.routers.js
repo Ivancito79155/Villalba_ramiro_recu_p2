@@ -13,14 +13,14 @@ const rout = Router();
 
 rout.get("/", HOME);
 
-rout.get("/db", getAllStudent);
+rout.get("/students", getAllStudent);
 
-rout.get("/db/:id", getStudentById);
+rout.get("/students/:id", getStudentById);
 
-rout.post("/db", postNewStudent);
+rout.post("/students", postNewStudent);
 
-rout.put("/db/:id", putStudent);
+rout.put("/students/:id", putStudent);
 
-rout.delete("/db/:id", deleteStudent);
+rout.delete("/students/:id", deleteStudent);
 
 module.exports = rout;

@@ -1,4 +1,4 @@
-const students = require("../db");
+const students = require("../students");
 
 function HOME(req, res) {
   res.send("HOME");
@@ -30,13 +30,13 @@ function postNewStudent(req, res) {
   age = parseInt(age);
   curse = curse.trim();
   if (age > 65 || age < 6) {
-    res.send("LA EDAD ESTA EN UN VALOR INVALIDO");
+    return res.send("LA EDAD ESTA EN UN VALOR INVALIDO");
   }
   if (typeof fullName === Number) {
-    res.send("ESTE CAMPO DEBE DE SER TEXTO");
+    return res.send("ESTE CAMPO DEBE DE SER TEXTO");
   }
   if (typeof curse === Number) {
-    res.send("ESTE CAMPO DEBE DE SER TEXTO");
+    return res.send("ESTE CAMPO DEBE DE SER TEXTO");
   }
   const repeatName = db.find((students) => students.fullName === fullName);
   if (repeatName) {
@@ -58,13 +58,13 @@ function putStudent(req, res) {
   age = parseInt(age);
   curse = curse.trim();
   if (age > 65 || age < 6) {
-    res.send("LA EDAD ESTA EN UN VALOR INVALIDO");
+    return res.send("LA EDAD ESTA EN UN VALOR INVALIDO");
   }
   if (typeof fullName === Number) {
-    res.send("ESTE CAMPO DEBE DE SER TEXTO");
+    return res.send("ESTE CAMPO DEBE DE SER TEXTO");
   }
   if (typeof curse === Number) {
-    res.send("ESTE CAMPO DEBE DE SER TEXTO");
+    return res.send("ESTE CAMPO DEBE DE SER TEXTO");
   }
   if (!fullName || !age || !curse) {
     return res.send("DATOS FALTANTES");
