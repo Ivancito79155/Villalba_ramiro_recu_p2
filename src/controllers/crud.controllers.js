@@ -22,9 +22,21 @@ function getStudentById(req, res) {
 
 function postNewStudent(req, res) {
   const id = new Date().getTime();
-  const { fullName, age, curse } = req.body;
+  let { fullName, age, curse } = req.body;
   if (!fullName || !age || !curse) {
     return res.send("DATOS FALTANTES");
+  }
+  fullName = fullName.trim();
+  age = parseInt(age);
+  curse = curse.trim();
+  if (age > 65 || age < 6) {
+    res.send("LA EDAD ESTA EN UN VALOR INVALIDO");
+  }
+  if (typeof fullName === Number) {
+    res.send("ESTE CAMPO DEBE DE SER TEXTO");
+  }
+  if (typeof curse === Number) {
+    res.send("ESTE CAMPO DEBE DE SER TEXTO");
   }
   const repeatName = db.find((db) => db.fullName === fullName);
   if (repeatName) {
@@ -44,7 +56,16 @@ function putStudent(req, res) {
   let { fullName, age, curse } = req.body;
   fullName = fullName.trim();
   age = parseInt(age);
-  curse = curse.trim;
+  curse = curse.trim();
+  if (age > 65 || age < 6) {
+    res.send("LA EDAD ESTA EN UN VALOR INVALIDO");
+  }
+  if (typeof fullName === Number) {
+    res.send("ESTE CAMPO DEBE DE SER TEXTO");
+  }
+  if (typeof curse === Number) {
+    res.send("ESTE CAMPO DEBE DE SER TEXTO");
+  }
   if (!fullName || !age || !curse) {
     return res.send("DATOS FALTANTES");
   }
