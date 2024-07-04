@@ -1,19 +1,19 @@
-const db = require("../db");
+const students = require("../db");
 
 function HOME(req, res) {
   res.send("HOME");
 }
 
 function getAllStudent(req, res) {
-  if (db.length === 0) {
+  if (students.length === 0) {
     return res.send("ACTUALMENTE NO HAY REGISTROS ACTUALMENTE");
   }
-  res.json(db);
+  res.json(students);
 }
 
 function getStudentById(req, res) {
   const id = parseInt(req.params.id);
-  const getStudent = db.find((fullName) => fullName.id === id);
+  const getStudent = students.find((fullName) => fullName.id === id);
   if (!getStudent) {
     return res.send("NO SE ENCONTRO EL REGISTRO DEL ESTUDIANTE.");
   }
@@ -38,11 +38,11 @@ function postNewStudent(req, res) {
   if (typeof curse === Number) {
     res.send("ESTE CAMPO DEBE DE SER TEXTO");
   }
-  const repeatName = db.find((db) => db.fullName === fullName);
+  const repeatName = db.find((students) => students.fullName === fullName);
   if (repeatName) {
     return res.send("YA EXISTE UN REGISTRO CON ESTE NOMBRE");
   }
-  db.push({
+  students.push({
     id: id,
     fullName: fullName,
     age: age,
@@ -69,24 +69,24 @@ function putStudent(req, res) {
   if (!fullName || !age || !curse) {
     return res.send("DATOS FALTANTES");
   }
-  const indexStuden = db.findIndex((db) => db.id === id);
+  const indexStuden = students.findIndex((students) => students.id === id);
   if (indexStuden === -1) {
     return res.send("EL REGISTRO QUE BUSCA NO EXISTE");
   }
-  db[indexStuden].id = id;
-  db[indexStuden].fullName = fullName;
-  db[indexStuden].age = age;
-  db[indexStuden].curse = curse;
+  students[indexStuden].id = id;
+  students[indexStuden].fullName = fullName;
+  students[indexStuden].age = age;
+  students[indexStuden].curse = curse;
   res.send("SE MODIFICO EL REGISTRO CON ÉXITO");
 }
 
 function deleteStudent(req, res) {
   const id = parseInt(req.params.id);
-  const indexStuden = db.findIndex((db) => db.id === id);
+  const indexStuden = students.findIndex((students) => students.id === id);
   if (indexStuden === -1) {
     return res.send("EL REGISTRO QUE BUSCA NO EXISTE");
   }
-  db.splice(indexStuden, 1);
+  students.splice(indexStuden, 1);
   res.send("SE ELIMINO EL REGISTRO CON EXITO");
 }
 
