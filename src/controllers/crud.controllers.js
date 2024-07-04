@@ -11,6 +11,14 @@ function getAllStudent(req, res) {
   res.json(db);
 }
 
+function getStudentById(req, res) {
+  const id = parseInt(req.params.id);
+  const getStudent = db.find((fullName) => fullName.id === id);
+  if (!getStudent) {
+    return res.send("NO SE ENCONTRO EL REGISTRO DEL ESTUDIANTE.");
+  }
+  res.json(getStudent);
+}
 
 function postNewStudent(req, res) {
   const id = new Date().getTime();
